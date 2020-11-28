@@ -516,7 +516,7 @@ let profilePublicButton = document.getElementById('profilePublic');
 let timezoneSelect = document.getElementById('select');
 
 
-const saveButton = document.getElementById('savech');
+const saveButton = document.getElementById('saveButton');
 const cancelButton = document.getElementById('cancelButton');
 
   saveButton.addEventListener('click',(e)=>{
