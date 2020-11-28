@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Maximum Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600&display=swap" rel="stylesheet">
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+  <header class="flexContainer">
+  <h1 class="logo"><em>Maximum</em> Analysis &trade;</h1>
+  <a href="#" class = "notifications" id="bell"><svg id="bellSvg" width="40" height="40"></svg></a>
+  <div class="verticalDivider"></div>
+
+  <a href="#" class="userImagea"><img src="images/randomUserMale.jpg" alt="User Maximo Altimus"></a>
+  <h2 class="name">Maximo Altimus</h2>
+  </header>
+
+<nav>
+
+  <a href="#"><img src="icons/icon-dashboard.svg" alt="navigation dashboard"></a>
+  <a href="#"><img src="icons/icon-members.svg" alt="navigation members"></a>
+  <a href="#"><img src="icons/icon-visits.svg" alt="navigation visits"></a>
+  <a href="#"><img src="icons/icon-settings.svg" alt="navigation settings"></a>
+
+</nav>
+<div class="container2">
+  <div class ="flexSearchTitle">
+
+
+  <div class="dashDiv">
+  <h1 class="dashTitle">Dashboard</h1>
+  </div>
+<div class="greyBackg">
+  <input class ="inputDash" type="search" name="search" placeholder="Search">
+</div>
+  </div>
+  <div class="alert" id="alert">
+
+
+  </div>
+  <div class="trafficTitle">
+
+    <div>
+    <h2>TRAFFIC</h2>
+    </div>
+
+    <div class="buttons">
+
+
+    <button class="button initial hourly highlight" type="button" name="button">Hourly</button>
+    <button class="button initial daily" type="button" name="button">Daily</button>
+    <button class="button initial weekly" type="button" name="button">Weekly</button>
+    <button class="button initial month" type="button" name="button">Monthly</button>
+</div>
+  </div>
+
+  <div class="first chartContainer">
+      <canvas id="generalTraffic"></canvas>
+  </div>
+
+<div class="twoDivs">
+
+
+  <div class="dailyTrafficBox">
+      <h2>DAILY TRAFFIC</h2>
+      <div class="chartContainer divOne">
+        <canvas id="dailyTraffic" ></canvas>
+    </div>
+  </div>
+
+    <div class="mobileUsersBox divTwo a">
+      <h2>MOBILE USERS</h2>
+      <div class="chartContainer">
+        <canvas id="mobileUsers" ></canvas>
+    </div>
+    </div>
+    </div>
+
+        <h2>SOCIAL</h2>
+
+<div class="socialDiv">
+
+
+        <div class="socialSection">
+          <div class="socialBox">
+          <img src="icons/iconTwitter.svg" alt="">
+          </div>
+          <div class="socialText">
+          <h3>Twitter</h3>
+          <p>10,345</p>
+        </div>
+        </div>
+            <div class="socialSection">
+              <div class="socialBox">
+              <img src="icons/iconFacebook.svg" alt="">
+              </div>
+              <div class="socialText">
+              <h3>Facebook</h3>
+              <p>8,735</p>
+            </div>
+            </div>
+
+        <div class="socialSection">
+          <div class="socialBox">
+          <img src="icons/iconGoogle.svg" alt="">
+          </div>
+          <div class="socialText">
+          <h3>Google+</h3>
+          <p>2,465</p>
+        </div>
+        </div>
+        </div>
+
+
+<div class="twoDivs membersDiv">
+
+
+  <div class="dailyTrafficBox">
+      <h2>NEW MEMBERS</h2>
+      <div class="chartContainer divOne">
+        <ul id ="membersUl" >
+
+        </ul>
+    </div>
+  </div>
+
+    <div class="mobileUsersBox divTwo">
+      <h2>RECENT ACTIVITY</h2>
+      <div class="chartContainer">
+      <ul id ="activityUl">
+
+      </ul>
+    </div>
+    </div>
+    </div>
+
+
+    <div class="twoDivs membersDiv">
+
+
+      <div class="dailyTrafficBox">
+          <h2>MESSAGE USER</h2>
+        <div id="messageAlert">
+
+        </div>
+
+
+          <div class="chartContainer divOne">
+            <div class="messageUserDiv">
+
+              <form autocomplete="off" action="index.html" method="post">
+                  <div class="autocomplete">
+                      <input id="myInput" type="text" name="input" placeholder="Search for User">
+                        </div>
+                        <textarea name="name" id= "textarea" placeholder="Message for User"></textarea>
+                          <button type="button" id= "messageUserInput" class="messageUserButton">Submit</button>
+                            </form>
+            </div>
+        </div>
+      </div>
+
+        <div class="mobileUsersBox divTwo">
+          <h2>SETTINGS</h2>
+
+<div class="buttonDiv">
+    <label for="emailNotifications">Send Email Notifications</label>
+      <div class="switch">
+        <input id="emailNotifications" type="checkbox"/>
+      <span class="slider round"></span>
+    </div>
+</div>
+
+<div class="buttonDiv secondButton">
+    <label for="profilePublic">Set Profile To Public</label>
+      <div class="switch ">
+        <input id="profilePublic" type="checkbox"/>
+      <span class="slider round"></span>
+    </div>
+</div>
+<div class="custom-select">
+   <select name="timezone" class="timezone" id="select">
+  <option value="init"  selected hidden>Select Timezone...</option>
+  <option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
+  	<option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
+  	<option value="-10:00">(GMT -10:00) Hawaii</option>
+  	<option value="-09:50">(GMT -9:30) Taiohae</option>
+  	<option value="-09:00">(GMT -9:00) Alaska</option>
+  	<option value="-08:00">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+  	<option value="-07:00">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+  	<option value="-06:00">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+  	<option value="-05:00">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+  	<option value="-04:50">(GMT -4:30) Caracas</option>
+  	<option value="-04:00">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+  	<option value="-03:50">(GMT -3:30) Newfoundland</option>
+  	<option value="-03:00">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+  	<option value="-02:00">(GMT -2:00) Mid-Atlantic</option>
+  	<option value="-01:00">(GMT -1:00) Azores, Cape Verde Islands</option>
+  	<option value="+00:00" >(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+  	<option value="+01:00">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+  	<option value="+02:00">(GMT +2:00) Kaliningrad, South Africa</option>
+  	<option value="+03:00">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+  	<option value="+03:50">(GMT +3:30) Tehran</option>
+  	<option value="+04:00">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+  	<option value="+04:50">(GMT +4:30) Kabul</option>
+  	<option value="+05:00">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+  	<option value="+05:50">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+  	<option value="+05:75">(GMT +5:45) Kathmandu, Pokhara</option>
+  	<option value="+06:00">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+  	<option value="+06:50">(GMT +6:30) Yangon, Mandalay</option>
+  	<option value="+07:00">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+  	<option value="+08:00">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+  	<option value="+08:75">(GMT +8:45) Eucla</option>
+  	<option value="+09:00">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+  	<option value="+09:50">(GMT +9:30) Adelaide, Darwin</option>
+  	<option value="+10:00">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+  	<option value="+10:50">(GMT +10:30) Lord Howe Island</option>
+  	<option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+  	<option value="+11:50">(GMT +11:30) Norfolk Island</option>
+  	<option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+  	<option value="+12:75">(GMT +12:45) Chatham Islands</option>
+  	<option value="+13:00">(GMT +13:00) Apia, Nukualofa</option>
+  	<option value="+14:00">(GMT +14:00) Line Islands, Tokelau</option>
+</select>
+</div>
+
+<div class="saveCancel">
+  <button class="save" type="button" name="Save" id="saveButton">Save</button>
+    <button class="cancel" type="button" name="Save" id="cancelButton">Cancel</button>
+</div>
+
+        </div>
+        </div>
+
+
+
+        </div>
+
+  </div>
+
+
+
+<script src="javascript/app.js" ></script>
+</body>
+
+
+
+</html>
