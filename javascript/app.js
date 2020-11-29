@@ -1,15 +1,84 @@
-
+//Variables
 
 
 let alert = document.getElementById('alert');
-
-
 const bell = document.getElementById('bell');
+const bellsvg = document.getElementById('bellSvg');
+
+
+              //Variables for the Chart
+var buttons = document.querySelectorAll(".button");
+const hourly = document.getElementById('hourly');
+const daily = document.getElementById('daily');
+const weekly = document.getElementById('weekly');
+const monthly = document.getElementById('monthly');
+
+
+            //Message User
+const alertDiv = document.getElementById('messageAlert');
+const messageUserInput = document.getElementById('messageUserInput');
+const user = document.getElementById('myInput');
+const message =  document.getElementById('textarea');
+
+
+          //Settings Options
+let emailNotificationsButton = document.getElementById('emailNotifications');
+let profilePublicButton = document.getElementById('profilePublic');
+let timezoneSelect = document.getElementById('select');
+const saveButton = document.getElementById('saveButton');
+const cancelButton = document.getElementById('cancelButton');
 
 
 
 
-bell.addEventListener('click',  function notifications(){
+          //People
+let people = [{firstName:"Jane", lastName:"Dullberg", age:26, profilePic:"images/member-1.jpg", dateOfSubscription:"10/15/20", email:"Jane@gmail.com", recentActivity:{ activity:"liked Maximum Analysis Tips and Tricks", time: "2hrs ago"}},
+              {firstName:"John", lastName:"Dumphry", age:34, profilePic:"images/member-2.jpg", dateOfSubscription:"10/15/20", email:"John@yahoo.com", recentActivity:{ activity:"commented on Getting an Internet Job", time: "4hrs ago"} },
+              {firstName:"Julie", lastName:"Doriatta", age:20, profilePic:"images/member-3.jpg", dateOfSubscription:"10/15/20", email:"Julie@doriatta.com", recentActivity:{ activity:"subscribed to Maximum Analysis", time: "7hrs ago"}},
+              {firstName:"Justin", lastName:"Domsley", age:22, profilePic:"images/member-4.jpg", dateOfSubscription:"10/15/20", email:"Justin@gmail.com", recentActivity:{ activity:"liked Maximum Analysis SEO for 2020", time: "15hrs ago"}}]
+
+const membersUl = document.getElementById('membersUl');
+const activityUl = document.getElementById('activityUl');
+
+
+
+//EventListeners
+
+
+
+
+
+      //Local Storage
+
+  saveButton.addEventListener('click',(e)=>{
+    let emailNotificationsOption = emailNotificationsButton.checked;
+    let profilePublicOption = profilePublicButton.checked;
+    let timezoneOption = timezoneSelect.value;
+    localStorage.setItem('email', emailNotificationsOption);
+    localStorage.setItem('profile', profilePublicOption);
+    localStorage.setItem('timezone', timezoneOption);
+  });
+
+  cancelButton.addEventListener('click',(e)=>{
+    let emailNotificationsOption = emailNotificationsButton.checked;
+    let profilePublicOption = profilePublicButton.checked;
+    let timezoneOption = timezoneSelect.value;
+    localStorage.setItem('email', false);
+    localStorage.setItem('profile', false);
+    localStorage.setItem('timezone', "init");
+  });
+
+emailNotificationsButton.checked = JSON.parse(localStorage.getItem('email'));
+
+profilePublicButton.checked = JSON.parse(localStorage.getItem('profile'));
+
+  const checkedEmail = JSON.parse(localStorage.getItem("emailNotifications"));
+
+
+
+                // Creates the Alerts when clicking on the bell
+
+   bell.addEventListener('click',  function notifications(){
 
    alert.innerHTML = `<div class = "confirmEmailAlert" id="firstAlert">
                       <div class = "textForAlert" > <em>Alert</em> Confirm Email address</div>
@@ -20,42 +89,59 @@ bell.addEventListener('click',  function notifications(){
                        <span class = "closebtn" onclick="this.parentNode.remove()" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
                        </div>`;});
 
+                  //Changes the Notification Bell to display the circle if there are alerts
+
+    document.addEventListener('click', function(){if(alert.innerHTML !== ''){
+      bellSvg.innerHTML = `
+      <path fill="#FFFFFF" class="st0" d="M24,18v-8c0-5.5-4.5-10-10-10S4,4.5,4,10v8l-4,8h9.1c0.5,2.3,2.5,4,4.9,4s4.4-1.7,4.9-4H28L24,18z M14,28
+    c-1.3,0-2.4-0.8-2.8-2h5.6C16.4,27.2,15.3,28,14,28z M3,24l3-6v-8c0-4.4,3.6-8,8-8s8,3.6,8,8v8l3,6H3z"/> <circle cx="23" cy="5" r="5" fill="red" />`
+
+    }else{
+      bellSvg.innerHTML = `
+      <path fill="#FFFFFF" class="st0" d="M24,18v-8c0-5.5-4.5-10-10-10S4,4.5,4,10v8l-4,8h9.1c0.5,2.3,2.5,4,4.9,4s4.4-1.7,4.9-4H28L24,18z M14,28
+    c-1.3,0-2.4-0.8-2.8-2h5.6C16.4,27.2,15.3,28,14,28z M3,24l3-6v-8c0-4.4,3.6-8,8-8s8,3.6,8,8v8l3,6H3z"/>`
+    }})
+
+    bellSvg.innerHTML = `
+    <path fill="#FFFFFF" class="st0" d="M24,18v-8c0-5.5-4.5-10-10-10S4,4.5,4,10v8l-4,8h9.1c0.5,2.3,2.5,4,4.9,4s4.4-1.7,4.9-4H28L24,18z M14,28
+    c-1.3,0-2.4-0.8-2.8-2h5.6C16.4,27.2,15.3,28,14,28z M3,24l3-6v-8c0-4.4,3.6-8,8-8s8,3.6,8,8v8l3,6H3z"/> <circle cx="23" cy="5" r="5" fill="red" />`;
+
+      //Displays the Correct Alert for messages
+
+    messageUserInput.addEventListener('click', function(){
+      if (user.value === "" && message.value === "") {
+           alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
+                              <div class = "textForAlert" > Please choose a recipient and write a message!</div>
+                              <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
+                              </div>`;
+       }
+      else if (user.value === "" && message.value !== "") {
+          alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
+                             <div class = "textForAlert" > Please choose a recipient!</div>
+                             <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
+                             </div>`;
+      }
+      else if (user.value !== "" && message.value === "") {
+          alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
+                             <div class = "textForAlert" > Please write a message!</div>
+                             <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
+                             </div>`;
+      }
+      else {
+          alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
+                             <div class = "textForAlert" >Your message was sent to ${user.value}!)</div>
+                             <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
+                             </div>`;
+      }
+      });
 
 
-document.addEventListener('click', function(){if(alert.innerHTML !== ''){
-  bellSvg.innerHTML = `
-  <path fill="#FFFFFF" class="st0" d="M24,18v-8c0-5.5-4.5-10-10-10S4,4.5,4,10v8l-4,8h9.1c0.5,2.3,2.5,4,4.9,4s4.4-1.7,4.9-4H28L24,18z M14,28
-c-1.3,0-2.4-0.8-2.8-2h5.6C16.4,27.2,15.3,28,14,28z M3,24l3-6v-8c0-4.4,3.6-8,8-8s8,3.6,8,8v8l3,6H3z"/> <circle cx="23" cy="5" r="5" fill="red" />`
-
-}else{
-  bellSvg.innerHTML = `
-  <path fill="#FFFFFF" class="st0" d="M24,18v-8c0-5.5-4.5-10-10-10S4,4.5,4,10v8l-4,8h9.1c0.5,2.3,2.5,4,4.9,4s4.4-1.7,4.9-4H28L24,18z M14,28
-c-1.3,0-2.4-0.8-2.8-2h5.6C16.4,27.2,15.3,28,14,28z M3,24l3-6v-8c0-4.4,3.6-8,8-8s8,3.6,8,8v8l3,6H3z"/>`
-}})
-
-bellSvg.innerHTML = `
-<path fill="#FFFFFF" class="st0" d="M24,18v-8c0-5.5-4.5-10-10-10S4,4.5,4,10v8l-4,8h9.1c0.5,2.3,2.5,4,4.9,4s4.4-1.7,4.9-4H28L24,18z M14,28
-c-1.3,0-2.4-0.8-2.8-2h5.6C16.4,27.2,15.3,28,14,28z M3,24l3-6v-8c0-4.4,3.6-8,8-8s8,3.6,8,8v8l3,6H3z"/> <circle cx="23" cy="5" r="5" fill="red" />`;
 
 
+//Charts
 
 
-
-
-
-
-
-
-
-const hourly = document.getElementById('hourly');
-const daily = document.getElementById('daily');
-const weekly = document.getElementById('weekly');
-const monthly = document.getElementById('monthly');
-
-
-
-
-
+                    //General Traffic Chart
 
 let chartContainer = document.getElementById('generalTraffic').getContext('2d');
 let trafficChart = new Chart(chartContainer, {
@@ -92,7 +178,7 @@ let trafficChart = new Chart(chartContainer, {
 });
 
 
-
+                    //Daily Traffic Chart
 
 let dailyTraffic = document.getElementById('dailyTraffic').getContext('2d');
 let dailyChart = new Chart(dailyTraffic, {
@@ -124,7 +210,7 @@ let dailyChart = new Chart(dailyTraffic, {
     }
 });
 
-
+                    //Mobile Users Chart
 
 let mobileUsers = document.getElementById('mobileUsers').getContext('2d');
 let mobileUsersChart = new Chart(mobileUsers, {
@@ -152,7 +238,10 @@ let mobileUsersChart = new Chart(mobileUsers, {
         },
     }
 });
-var buttons = document.querySelectorAll(".button");
+
+
+    //Chnaging Charts for different button clicks(hourly,daily,weekly...)
+
 
 for (button in buttons) {
    buttons[button].onclick = function() {
@@ -161,6 +250,9 @@ for (button in buttons) {
        })
        this.classList.add('highlight');
        if(this.classList.contains('hourly')){
+
+//I know this section might not comply to DRY but I couldn't figure out how to
+//just change the labels and the data without adding all the rest, I will continue researching
 
 
          let chartContainer = document.getElementById('generalTraffic').getContext('2d');
@@ -318,15 +410,8 @@ for (button in buttons) {
 
 
 
+//Creates List of Members
 
-
-let people = [{firstName:"Jane", lastName:"Dullberg", age:26, profilePic:"images/member-1.jpg", dateOfSubscription:"10/15/20", email:"Jane@gmail.com", recentActivity:{ activity:"liked Maximum Analysis Tips and Tricks", time: "2hrs ago"}},
-              {firstName:"John", lastName:"Dumphry", age:34, profilePic:"images/member-2.jpg", dateOfSubscription:"10/15/20", email:"John@yahoo.com", recentActivity:{ activity:"commented on Getting an Internet Job", time: "4hrs ago"} },
-              {firstName:"Julie", lastName:"Doriatta", age:20, profilePic:"images/member-3.jpg", dateOfSubscription:"10/15/20", email:"Julie@doriatta.com", recentActivity:{ activity:"subscribed to Maximum Analysis", time: "7hrs ago"}},
-              {firstName:"Justin", lastName:"Domsley", age:22, profilePic:"images/member-4.jpg", dateOfSubscription:"10/15/20", email:"Justin@gmail.com", recentActivity:{ activity:"liked Maximum Analysis SEO for 2020", time: "15hrs ago"}}]
-
-const membersUl = document.getElementById('membersUl');
-const activityUl = document.getElementById('activityUl');
 
 for(let i = 0; i < people.length; i++){
 
@@ -347,7 +432,7 @@ for(let i = 0; i < people.length; i++){
 }
 
 
-
+//Creates List of Recent Activity
 
 for(let i = 0; i < people.length; i++){
   let recentActivity = people[i].recentActivity;
@@ -371,54 +456,7 @@ for(let i = 0; i < people.length; i++){
 
 
 
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-
-      const select =  document.getElementById("select");
-
-
-
-     for (let i=0; i<timezones.length; i++){
-
-       let timezoneLabel = timezones[i].label;
-       let timezoneValue = timezones[i].value;
-
-         let option = document.createElement('option');
-
-        option.innerHTML += `${timezoneLabel}`;
-        option.setAttribute('value', `${timezoneValue}`)
- select.appendChild(option);
-
-
-
-
-
-     }
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
+//Custom Switch
 
      var x, i, j, l, ll, selElmnt, a, b, c;
      /* Look for any elements with the class "custom-select": */
@@ -511,40 +549,7 @@ for(let i = 0; i < people.length; i++){
 
 
 
-let emailNotificationsButton = document.getElementById('emailNotifications');
-let profilePublicButton = document.getElementById('profilePublic');
-let timezoneSelect = document.getElementById('select');
-
-
-const saveButton = document.getElementById('saveButton');
-const cancelButton = document.getElementById('cancelButton');
-
-  saveButton.addEventListener('click',(e)=>{
-    let emailNotificationsOption = emailNotificationsButton.checked;
-    let profilePublicOption = profilePublicButton.checked;
-    let timezoneOption = timezoneSelect.value;
-    localStorage.setItem('email', emailNotificationsOption);
-    localStorage.setItem('profile', profilePublicOption);
-    localStorage.setItem('timezone', timezoneOption);
-  });
-
-  cancelButton.addEventListener('click',(e)=>{
-    let emailNotificationsOption = emailNotificationsButton.checked;
-    let profilePublicOption = profilePublicButton.checked;
-    let timezoneOption = timezoneSelect.value;
-    localStorage.setItem('email', false);
-    localStorage.setItem('profile', false);
-    localStorage.setItem('timezone', "init");
-  });
-
-emailNotificationsButton.checked = JSON.parse(localStorage.getItem('email'));
-
-profilePublicButton.checked = JSON.parse(localStorage.getItem('profile'))
-
-  const checkedEmail = JSON.parse(localStorage.getItem("emailNotifications"))
-
-
-
+        //Custom autocomplete
 
     function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
@@ -643,46 +648,4 @@ document.addEventListener("click", function (e) {
 });
 }
 
-
-
-
 autocomplete(document.getElementById("myInput"), people);
-
-
-
-
-const bellsvg = document.getElementById('bellSvg');
-
-
-
-const alertDiv = document.getElementById('messageAlert');
-const messageUserInput = document.getElementById('messageUserInput');
-const user = document.getElementById('myInput');
-const message =  document.getElementById('textarea');
-
-messageUserInput.addEventListener('click', function(){
-  if (user.value === "" && message.value === "") {
-       alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
-                          <div class = "textForAlert" > Please choose a recipient and write a message!</div>
-                          <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
-                          </div>`;
-   }
-  else if (user.value === "" && message.value !== "") {
-      alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
-                         <div class = "textForAlert" > Please choose a recipient!</div>
-                         <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
-                         </div>`;
-  }
-  else if (user.value !== "" && message.value === "") {
-      alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
-                         <div class = "textForAlert" > Please write a message!</div>
-                         <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
-                         </div>`;
-  }
-  else {
-      alertDiv.innerHTML = `<div class = "confirmEmailAlert" id = "secondAlert">
-                         <div class = "textForAlert" >Your message was sent to ${user.value}!)</div>
-                         <span class = "closebtn" onclick="this.parentElement.style.display='none';" ><img class="closeButton" src="icons/close.svg" alt="close"></span>
-                         </div>`;
-  }
-  });

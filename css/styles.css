@@ -107,7 +107,14 @@ display: grid;
 
 }
 
+.form{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+width: 80vw;
 
+}
 .inputDash{
 
 height: 40px;
@@ -178,7 +185,7 @@ margin-right: 2vw;
   width: 92%;
 min-width: 30px;
 grid-area:traffic;
-margin-left: 8vw ;
+margin-left: 3vw ;
 display: block;
 }
 
@@ -428,9 +435,7 @@ border-width: thin;
       }
 
 
-  .chartContainer{
 
-  margin-left: 7.8vh ;}
 
 
   .container2{
@@ -487,6 +492,9 @@ display: flex;
 @media(min-width:1024px){
 
 
+.form{
+  width: 40vw;
+}
 
   .dailyTrafficBox{
     width: 100%;}
@@ -514,7 +522,8 @@ border-right-style: none;
     flex-direction: row;
 
 }
-.socialDiv{flex-direction: row;}
+.socialDiv{
+  flex-direction: row;}
 
 }
 
@@ -822,7 +831,7 @@ align-items: center;
 #textarea{
   padding: 10px;
   height: 86px;
-  width: 90%;
+  width: 100%;
   margin: 20px auto;
   border-radius: 12px;
   border-width:thin;
@@ -834,7 +843,7 @@ align-items: center;
 #myInput{
 padding-left: 10px;
 height: 40px;
-  width: 90%;
+
   margin: 20px auto;
   border-radius: 12px;
   border-width:thin;
@@ -844,7 +853,7 @@ height: 40px;
 
 
 .messageUserButton{
-  width: 90%;
+  width: 100%;
   padding: 20px;
   border-style: none;
   color: white;
